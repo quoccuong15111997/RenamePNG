@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenamePNG", "RenamePNG\RenamePNG.csproj", "{D671CB41-C1B8-4071-9D51-751FFFCBFFFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D671CB41-C1B8-4071-9D51-751FFFCBFFFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D671CB41-C1B8-4071-9D51-751FFFCBFFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D671CB41-C1B8-4071-9D51-751FFFCBFFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D671CB41-C1B8-4071-9D51-751FFFCBFFFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {268CE78D-917E-4CDA-BB5E-8B208F6999DF}
+	EndGlobalSection
+EndGlobal
