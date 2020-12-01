@@ -10,17 +10,20 @@ using System.Threading.Tasks;
 
 namespace RenamePNG.Controller
 {
-    public class FileController
+    public class FileController : FileSaveCallback
     {
         private PNGModel _model;
         private List<string> _listKeywords;
         private FileSaveCallback _fileSaveCallback;
-        private SortModel _sortModel;
+        private RunModel _runModel;
         private int flag = 0;
         private int target = 0;
-        public FileController()
+        public FileController(RunModel runModel, FileSaveCallback fileSaveCallback)
         {           
-            loadListKeyword();            
+            loadListKeyword();
+            this._runModel = runModel;
+            this._fileSaveCallback = fileSaveCallback;
+            init(_runModel.PNGModel, this);
         }
 
         private void loadListKeyword()
@@ -137,44 +140,45 @@ namespace RenamePNG.Controller
                 _fileSaveCallback.onSaveFail(e.Message);
             }
         }
-        public void Sort(SortModel sortModel, FileSaveCallback fileSaveCallback)
+        int flagSort = 0;
+        int targetSort = 0;
+        private void Sort(string[] entries, SortModel _sortModel, FileSaveCallback fileSaveCallback)
         {
-            flag = 0;
-            target = 0;
-            this._sortModel = sortModel;
-            this._fileSaveCallback = fileSaveCallback;
-                      
-            string[] entries = Directory.GetFileSystemEntries(_sortModel.RootPath, "*.png", SearchOption.AllDirectories);
-            target = entries.Length;
+            flagSort = 0;
+            targetSort = entries.Length;
             foreach (string path in entries)
             {
-                Thread t = new Thread(() =>
-                {                  
-                    string fileName = Path.GetFileName(path);
-                    foreach(string s in _sortModel.Keywords.Split(','))
+                string fileName = Path.GetFileName(path);
+                string s = _sortModel.Keywords;
+                if (fileName.Contains(s)
+                    || fileName.Contains(s.ToLower())
+                    || fileName.Contains(s.ToUpper()))
+                {
+                    string pathSave = _sortModel.PathSave;
+                    if (_sortModel.IsCreateFolder)
                     {
-                        if (fileName.Contains(s) 
-                        || fileName.Contains(s.ToLower()) 
-                        || fileName.Contains(s.ToUpper()))
+                        if (!Directory.Exists(pathSave + "\\" + s))
                         {
-                            string pathSave = _sortModel.PathSave;
-                            if (_sortModel.IsCreateFolder)
-                            {
-                                if (!Directory.Exists(pathSave + "\\" + s))
-                                {
-                                    Directory.CreateDirectory(pathSave + "\\" + s);
-                                }                               
-                                pathSave = pathSave + "\\" + s;
-                            }
-                            saveAsFile(path, pathSave+ "\\" + fileName);
+                            Directory.CreateDirectory(pathSave + "\\" + s);
                         }
+                        pathSave = pathSave + "\\" + s;
                     }
-                    flag += 1;
-                    checkStatus();
-                });
-                t.Start();
+                    saveAsFile(path, pathSave + "\\" + fileName);
+                }
+                flagSort += 1;
+                checkFlagSort();
             }
         }
+
+        private void checkFlagSort()
+        {
+            if(flagSort == targetSort)
+            {
+                flag += 1;
+                checkStatus();
+            }
+        }
+
         private void saveAsFileSort(string pathOld, string pathNew)
         {
             try
@@ -186,6 +190,29 @@ namespace RenamePNG.Controller
             {
                 _fileSaveCallback.onSaveFail(e.Message);
             }
+        }
+
+        public void onSaveSuccess()
+        {
+            if(_runModel.SortModels.Count() > 0)
+            {
+                flag = 0;
+                target = _runModel.SortModels.Count();
+                string[] entries = Directory.GetFileSystemEntries(_runModel.PNGModel.PathSaveAs, "*.png", SearchOption.AllDirectories);
+                foreach (var sortmodel in _runModel.SortModels)
+                {
+                    Sort(entries, sortmodel, _fileSaveCallback);
+                }
+            }
+            else
+            {
+                _fileSaveCallback.onSaveSuccess();
+            }
+        }
+
+        public void onSaveFail(string mess)
+        {
+            throw new NotImplementedException();
         }
     }
 }

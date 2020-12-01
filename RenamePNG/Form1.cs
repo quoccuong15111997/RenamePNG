@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace RenamePNG
 {
-    public partial class Form1 : Form, FileSaveCallback
+    public partial class Form1 : Form, RunCallback
     {
         private string _rootPath = "";
         public Form1()
@@ -60,33 +60,47 @@ namespace RenamePNG
                     return;
                 }
             }
+            List<SortModel> _listSortModel = new List<SortModel>();
+            if (!edtPathKewordFilter.Text.Equals(""))
+            {
+                try
+                {
+                    string[] lines = File.ReadAllLines(edtPathKewordFilter.Text.Trim());
+                    foreach (string line in lines)
+                    {
+                        if (!line.Equals(""))
+                        {
+                            SortModel _sortModel = new SortModel();
+                            _sortModel.Keywords = line;
+                            _sortModel.PathSave = edtPathSaveAs.Text.Trim();
+                            _sortModel.RootPath = edtRootPath.Text.Trim();
+                            _sortModel.IsCreateFolder = true;
+                            _listSortModel.Add(_sortModel);
+
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+            RunModel _runModel = new RunModel();
+
             PNGModel model = new PNGModel();
             model.RootPath = edtRootPath.Text.ToString().Trim();
             model.isReplace = radReplace.Checked;
             model.isSaveAs = radSaveAs.Checked;
             model.Keywords = edtKeyword.Text;
             model.PathSaveAs = edtPathSaveAs.Text.ToString().Trim();
-            FileController controller = new FileController();
-            controller.init(model,this);
+
+            _runModel.SortModels = _listSortModel;
+            _runModel.PNGModel = model;
+
+            RenameController _renameController = new RenameController(_runModel, this);
+            _renameController.Start();
         }
-
-        private void radReplace_CheckedChanged(object sender, EventArgs e)
-        {
-          
-            
-        }
-
-        private void radSaveAs_CheckedChanged(object sender, EventArgs e)
-        {
-            
-            
-        }
-
-        private void panelSaveAs_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+   
         private void btnSelectRootPath_Click(object sender, EventArgs e)
         {
             using (var fbd = new FolderBrowserDialog())
@@ -100,62 +114,29 @@ namespace RenamePNG
                 }
             }
         }
-
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            
-           
-        }
-
-        public void onSaveSuccess()
-        {
-            MessageBox.Show("Process Success", "Done");
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            if (edtRootPath.Text.Equals(""))
-            {
-                MessageBox.Show("Root Path Is Emty", "ERROR");
-                return;
-            }
-            if (edtKeyword.Text.Equals(""))
-            {
-                MessageBox.Show("Keyword Is Emty", "ERROR");
-                return;
-            }
-            if (radSaveAs.Checked)
-            {
-                if (edtPathSaveAs.Text.Equals(""))
-                {
-                    MessageBox.Show("Save Path Is Emty", "ERROR");
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Mode Run Only With Save As", "ERROR");
-            }
-            SortModel sortModel = new SortModel();
-            sortModel.PathSave = edtPathSaveAs.Text;
-            sortModel.RootPath = edtRootPath.Text;
-            sortModel.Keywords = edtKeyword.Text;
-            sortModel.IsCreateFolder = chkCreateNewFolder.Checked;
-            FileController fileController = new FileController();
-            fileController.Sort(sortModel, this);
-        }
+        
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string filename = "";
+            var loadDialog = new OpenFileDialog { Filter = "Text File|*.txt"};
+            if (loadDialog.ShowDialog() == DialogResult.OK)
+                filename = loadDialog.FileName;
+            edtPathKewordFilter.Text = filename;
         }
 
-        public void onSaveFail(string mess)
+        public void OnRunSuccess()
+        {
+            MessageBox.Show("Process Success", "Done");
+        }
+
+        public void OnRunFail(string mess)
         {
             MessageBox.Show(mess, "SAVE ERROR");
         }

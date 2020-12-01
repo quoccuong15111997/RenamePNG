@@ -46,12 +46,11 @@ namespace RenamePNG
             this.btnExit = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chkCreateNewFolder = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.edtPathKewordFilter = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panelSaveAs.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // edtRootPath
@@ -64,7 +63,7 @@ namespace RenamePNG
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 93);
+            this.label1.Location = new System.Drawing.Point(36, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
@@ -83,31 +82,29 @@ namespace RenamePNG
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(59, 133);
+            this.label2.Location = new System.Drawing.Point(29, 133);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Keywords";
+            this.label2.Text = "Keywords Rename";
             // 
             // edtKeyword
             // 
             this.edtKeyword.Location = new System.Drawing.Point(138, 130);
-            this.edtKeyword.Multiline = true;
             this.edtKeyword.Name = "edtKeyword";
-            this.edtKeyword.Size = new System.Drawing.Size(510, 46);
+            this.edtKeyword.Size = new System.Drawing.Size(510, 20);
             this.edtKeyword.TabIndex = 3;
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(663, 153);
+            this.btnImport.Location = new System.Drawing.Point(663, 128);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(114, 23);
             this.btnImport.TabIndex = 5;
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Visible = false;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
-            // 
+          
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.panelSaveAs);
@@ -129,7 +126,7 @@ namespace RenamePNG
             this.panelSaveAs.Name = "panelSaveAs";
             this.panelSaveAs.Size = new System.Drawing.Size(675, 51);
             this.panelSaveAs.TabIndex = 6;
-            this.panelSaveAs.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSaveAs_Paint);
+            
             // 
             // btnSaveAs
             // 
@@ -168,7 +165,7 @@ namespace RenamePNG
             this.radSaveAs.TabStop = true;
             this.radSaveAs.Text = "Save As Coppy";
             this.radSaveAs.UseVisualStyleBackColor = true;
-            this.radSaveAs.CheckedChanged += new System.EventHandler(this.radSaveAs_CheckedChanged);
+           
             // 
             // radReplace
             // 
@@ -179,11 +176,11 @@ namespace RenamePNG
             this.radReplace.TabIndex = 0;
             this.radReplace.Text = "Replace";
             this.radReplace.UseVisualStyleBackColor = true;
-            this.radReplace.CheckedChanged += new System.EventHandler(this.radReplace_CheckedChanged);
+         
             // 
             // brnStart
             // 
-            this.brnStart.Location = new System.Drawing.Point(316, 430);
+            this.brnStart.Location = new System.Drawing.Point(479, 331);
             this.brnStart.Name = "brnStart";
             this.brnStart.Size = new System.Drawing.Size(156, 23);
             this.brnStart.TabIndex = 7;
@@ -193,7 +190,7 @@ namespace RenamePNG
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(661, 430);
+            this.btnExit.Location = new System.Drawing.Point(664, 331);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(156, 23);
             this.btnExit.TabIndex = 8;
@@ -215,51 +212,48 @@ namespace RenamePNG
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 443);
+            this.label5.Location = new System.Drawing.Point(15, 344);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "v0.0.1_snap26112020";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label5.Text = "v0.0.2_snap01122020";
+           
             // 
-            // button1
+            // label6
             // 
-            this.button1.Location = new System.Drawing.Point(489, 430);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(156, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Filter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(103, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Keywords Filter Path";
             // 
-            // groupBox2
+            // edtPathKewordFilter
             // 
-            this.groupBox2.Controls.Add(this.chkCreateNewFolder);
-            this.groupBox2.Location = new System.Drawing.Point(62, 326);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(715, 74);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Filter Option";
+            this.edtPathKewordFilter.Location = new System.Drawing.Point(138, 166);
+            this.edtPathKewordFilter.Name = "edtPathKewordFilter";
+            this.edtPathKewordFilter.Size = new System.Drawing.Size(510, 20);
+            this.edtPathKewordFilter.TabIndex = 13;
             // 
-            // chkCreateNewFolder
+            // button2
             // 
-            this.chkCreateNewFolder.AutoSize = true;
-            this.chkCreateNewFolder.Location = new System.Drawing.Point(42, 28);
-            this.chkCreateNewFolder.Name = "chkCreateNewFolder";
-            this.chkCreateNewFolder.Size = new System.Drawing.Size(114, 17);
-            this.chkCreateNewFolder.TabIndex = 0;
-            this.chkCreateNewFolder.Text = "Create New Folder";
-            this.chkCreateNewFolder.UseVisualStyleBackColor = true;
+            this.button2.Location = new System.Drawing.Point(663, 164);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(114, 23);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Select File";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(829, 465);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(829, 371);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.edtPathKewordFilter);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnExit);
@@ -279,8 +273,6 @@ namespace RenamePNG
             this.groupBox1.PerformLayout();
             this.panelSaveAs.ResumeLayout(false);
             this.panelSaveAs.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,9 +297,9 @@ namespace RenamePNG
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chkCreateNewFolder;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox edtPathKewordFilter;
+        private System.Windows.Forms.Button button2;
     }
 }
 
