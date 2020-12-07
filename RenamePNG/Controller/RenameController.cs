@@ -118,8 +118,8 @@ namespace RenamePNG.Controller
                         string fileName = Path.GetFileName(path);
                         string s = _sortModel.Keywords;
                         if (fileName.Contains(s)
-                            || fileName.Contains(s.ToLower())
-                            || fileName.Contains(s.ToUpper()))
+                            || fileName.ToLower().Contains(s.ToLower())
+                            || fileName.ToUpper().Contains(s.ToUpper()))
                         {
                             string pathSave = rootPath;
                             if (_sortModel.IsCreateFolder)
@@ -130,10 +130,13 @@ namespace RenamePNG.Controller
                                 }
                                 pathSave = pathSave + "\\" + s;
                             }
-                            _fileHelper.FileSaveAs(path, pathSave + "\\" + fileName + ".png");
+                            bool res = _fileHelper.FileSaveAs(path, pathSave + "\\" + fileName);
+                            if (res)
+                                File.Delete(path);
                         }                       
                     }
                 });
+                thread.IsBackground = true;
                 thread.Start();
                 thread.Join();
                 _flagSave += 1;
@@ -157,7 +160,7 @@ namespace RenamePNG.Controller
 
             foreach (string line in lines)
             {
-                _listKeywordsRemove.AddRange(line.Split(','));
+                _listKeywordsRemove.Add(line);
             }
 
         }

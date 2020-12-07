@@ -104,7 +104,7 @@ namespace RenamePNG
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Visible = false;
-          
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.panelSaveAs);
@@ -126,7 +126,6 @@ namespace RenamePNG
             this.panelSaveAs.Name = "panelSaveAs";
             this.panelSaveAs.Size = new System.Drawing.Size(675, 51);
             this.panelSaveAs.TabIndex = 6;
-            
             // 
             // btnSaveAs
             // 
@@ -165,7 +164,6 @@ namespace RenamePNG
             this.radSaveAs.TabStop = true;
             this.radSaveAs.Text = "Save As Coppy";
             this.radSaveAs.UseVisualStyleBackColor = true;
-           
             // 
             // radReplace
             // 
@@ -176,15 +174,14 @@ namespace RenamePNG
             this.radReplace.TabIndex = 0;
             this.radReplace.Text = "Replace";
             this.radReplace.UseVisualStyleBackColor = true;
-         
             // 
             // brnStart
             // 
-            this.brnStart.Location = new System.Drawing.Point(479, 331);
+            this.brnStart.Location = new System.Drawing.Point(476, 331);
             this.brnStart.Name = "brnStart";
-            this.brnStart.Size = new System.Drawing.Size(156, 23);
+            this.brnStart.Size = new System.Drawing.Size(159, 23);
             this.brnStart.TabIndex = 7;
-            this.brnStart.Text = "Rename";
+            this.brnStart.Text = "Rename And Filter";
             this.brnStart.UseVisualStyleBackColor = true;
             this.brnStart.Click += new System.EventHandler(this.brnStart_Click);
             // 
@@ -216,8 +213,7 @@ namespace RenamePNG
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(121, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "v0.0.2_snap01122020";
-           
+            this.label5.Text = "v0.0.3_snap08122020";
             // 
             // label6
             // 

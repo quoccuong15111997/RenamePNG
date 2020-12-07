@@ -20,6 +20,7 @@ namespace RenamePNG.Utity
             {
                 FileInfo file = new FileInfo(curentPath);
                 file.CopyTo(newPath);
+
                 res = true;
             }
             catch (Exception e)
